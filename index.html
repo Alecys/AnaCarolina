@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contador de Vendas</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="bg-shapes"></div>
+
+  <main class="card">
+    <header class="header">
+      <span class="badge">IMOBILIÁRIA</span>
+      <h1>VENDIDOS</h1>
+    </header>
+
+    <section class="counter">
+      <div id="count" class="count">0</div>
+      <div class="sub">unidades</div>
+    </section>
+
+    <section class="actions">
+      <button id="addBtn" class="btn primary">Vendeu +1</button>
+      <button id="subBtn" class="btn ghost hidden" title="Correção">Desvendeu -1</button>
+    </section>
+
+    <footer class="footer">
+      <small>Atualiza automaticamente • Salvo no navegador</small>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
