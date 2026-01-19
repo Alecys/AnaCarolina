@@ -1,50 +1,57 @@
-const key = 'contador_vendidos';
-let count = Number(localStorage.getItem(key) || 0);
+// Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getFirestore,
+  doc,
+  onSnapshot,
+  updateDoc,
+  increment
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const el = document.getElementById('count');
-const addBtn = document.getElementById('addBtn');
-const subBtn = document.getElementById('subBtn');
+const firebaseConfig = {
+  apiKey: "SUA_API_KEY",
+  authDomain: "SEU_DOMINIO",
+  projectId: "SEU_PROJECT_ID",
+};
 
-function render(){
-  el.textContent = count;
-  localStorage.setItem(key, count);
-  subBtn.classList.toggle('hidden', count <= 0);
-}
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-addBtn.addEventListener('click', ()=>{
-  count += 1;
-  pulse();
-  render();
-});
+const ref = doc(db, "contador", "vendidos");
 
-// Botão oculto para correção (aparece ao passar o mouse no card)
-subBtn.addEventListener('click', ()=>{
-  count = Math.max(0, count - 1);
-  render();
-});
+const el = document.getElementById("count");
+const addBtn = document.getElementById("addBtn");
+const subBtn = document.getElementById("subBtn");
 
-// Atalho secreto: segurar ALT e clicar no número para subtrair
-el.addEventListener('click', (e)=>{
-  if(e.altKey){
-    count = Math.max(0, count - 1);
-    render();
+// Atualiza em tempo real
+onSnapshot(ref, (docSnap) => {
+  if (docSnap.exists()) {
+    el.textContent = docSnap.data().valor;
   }
 });
 
-// Mostrar botão de correção ao passar o mouse
-document.querySelector('.card').addEventListener('mouseenter', ()=>{
-  if(count>0) subBtn.classList.remove('hidden');
-});
-document.querySelector('.card').addEventListener('mouseleave', ()=>{
-  subBtn.classList.add('hidden');
+// Soma +1
+addBtn.addEventListener("click", async () => {
+  pulse();
+  await updateDoc(ref, { valor: increment(1) });
 });
 
-function pulse(){
-  el.animate([
-    { transform:'scale(1)' },
-    { transform:'scale(1.08)' },
-    { transform:'scale(1)' }
-  ], { duration: 280, easing:'ease-out' });
+// Subtrai -1
+subBtn.addEventListener("click", async () => {
+  await updateDoc(ref, { valor: increment(-1) });
+});
+
+// Mostrar botão oculto
+document.querySelector(".card").addEventListener("mouseenter", () => {
+  subBtn.classList.remove("hidden");
+});
+document.querySelector(".card").addEventListener("mouseleave", () => {
+  subBtn.classList.add("hidden");
+});
+
+function pulse() {
+  el.animate(
+    [{ transform: "scale(1)" }, { transform: "scale(1.08)" }, { transform: "scale(1)" }],
+    { duration: 280 }
+  );
 }
-
-render();
