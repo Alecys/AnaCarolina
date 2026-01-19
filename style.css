@@ -114,3 +114,44 @@ body{
   margin-top:18px;
   color:var(--muted);
 }
+.countdown{
+  margin-top:24px;
+}
+
+.countdown h2{
+  letter-spacing:.2em;
+  font-size:14px;
+  color:var(--muted);
+  margin-bottom:10px;
+  text-transform:uppercase;
+}
+
+.timer{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+}
+
+.timer div{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:14px;
+  padding:10px 14px;
+  min-width:70px;
+}
+
+.timer span{
+  font-size:28px;
+  font-weight:900;
+  display:block;
+  background: linear-gradient(90deg, #7dd3fc, #34d399);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.timer small{
+  font-size:11px;
+  color:var(--muted);
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
