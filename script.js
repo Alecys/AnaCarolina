@@ -9,9 +9,9 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "SUA_API_KEY",
-  authDomain: "SEU_DOMINIO",
-  projectId: "SEU_PROJECT_ID",
+  apiKey: "AIzaSyBJ1W-Sp2bnFD276JxFUhgK0xl6pKWCnmI",
+  authDomain: "ana-banco.firebaseapp.com",
+  projectId: "ana-banco",
 };
 
 const app = initializeApp(firebaseConfig);
