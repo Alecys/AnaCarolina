@@ -55,3 +55,39 @@ function pulse() {
     { duration: 280 }
   );
 }
+
+// CONTADOR REGRESSIVO ATÉ 14 DE MARÇO
+const targetDate = new Date("2026-03-14T23:59:59"); 
+// se quiser outro ano, é só trocar 2026
+
+const dEl = document.getElementById("d");
+const hEl = document.getElementById("h");
+const mEl = document.getElementById("m");
+const sEl = document.getElementById("s");
+
+function updateCountdown() {
+  const now = new Date();
+  const diff = targetDate - now;
+
+  if (diff <= 0) {
+    dEl.textContent = 0;
+    hEl.textContent = 0;
+    mEl.textContent = 0;
+    sEl.textContent = 0;
+    return;
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  dEl.textContent = days;
+  hEl.textContent = hours;
+  mEl.textContent = minutes;
+  sEl.textContent = seconds;
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
